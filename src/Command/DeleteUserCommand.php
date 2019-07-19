@@ -33,7 +33,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * Check out the code of the src/App/Command/AddUserCommand.php file for
  * the full explanation about Symfony commands.
  *
- * See https://symfony.com/doc/current/cookbook/console/console_command.html
+ * See https://symfony.com/doc/current/console.html
  * For more advanced uses, commands can be defined as services too. See
  * https://symfony.com/doc/current/console/commands_as_services.html
  *
@@ -61,7 +61,7 @@ class DeleteUserCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Deletes users from the database')
@@ -79,7 +79,7 @@ HELP
             );
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         // SymfonyStyle is an optional feature that Symfony provides so you can
         // apply a consistent look to the commands of your application.
@@ -108,7 +108,7 @@ HELP
         $input->setArgument('username', $username);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $username = $this->validator->validateUsername($input->getArgument('username'));
 
@@ -121,7 +121,7 @@ HELP
 
         // After an entity has been removed its in-memory state is the same
         // as before the removal, except for generated identifiers.
-        // See http://docs.doctrine-project.org/en/latest/reference/working-with-objects.html#removing-entities
+        // See https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/working-with-objects.html#removing-entities
         $userId = $user->getId();
 
         $this->entityManager->remove($user);
